@@ -1,0 +1,29 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="p-6 max-w-sm w-full bg-white shadow-md rounded-md">
+    <h2 class="text-2xl font-bold text-center text-gray-700 mb-8">Inicio de Sesion</h2>
+    <form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="space-y-6">
+      <mat-form-field appearance="fill" class="w-full ">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email">
+        <mat-error *ngIf="validateForm.get('email')?.hasError('required')">
+          email is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="validateForm.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="w-full" type="submit" [disabled]="validateForm.invalid">
+        Login
+      </button>
+    </form>
+  </div>
+</div>

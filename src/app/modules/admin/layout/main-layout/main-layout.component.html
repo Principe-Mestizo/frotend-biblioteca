@@ -1,0 +1,55 @@
+<div class="flex flex-col min-h-screen bg-gray-900 text-white">
+  <!-- Header -->
+  <div class="max-w-screen-xl mx-auto w-full">
+    <header class=" text-white p-4 flex justify-between items-center">
+
+        <h1 class="text-2xl font-bold ">
+          <mat-icon class="mr-2 text-3xl">menu_book</mat-icon>
+          Biblioteca</h1>
+        <button mat-raised-button color="warn" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          Cerrar Sesión
+        </button>
+    </header>
+  </div>
+
+  <!-- Navigation -->
+  <div class="max-w-screen-xl mx-auto w-full">
+    <nav class="p-2">
+      <div class="flex items-center">
+        <ul class="flex space-x-4 flex-grow items-center">
+          <ng-container *ngFor="let item of menuItems">
+            <div>
+              <li *ngIf="hasRole(item.roles) | async">
+                <a [routerLink]="[item.path]"
+                   routerLinkActive="bg-blue-700"
+                   class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition duration-150 ease-in-out flex items-center">
+                  <mat-icon class="mr-2">{{item.icon}}</mat-icon>
+                  {{item.title}}
+                </a>
+              </li>
+            </div>
+          </ng-container>
+        </ul>
+        <div class="flex-grow"></div>
+        <p class="text-white ml-4">Usuario: {{ (user$ | async)!.email }}</p>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="flex-grow p-4">
+    <!-- Contenedor principal con borde y ancho -->
+    <div class="max-w-screen-xl xl:max-w-screen-2xl mx-auto bg-gray-900 p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div class="max-w-screen-xl mx-auto w-full">
+    <footer class=" text-gray-400 p-4 flex justify-between">
+      <p>&copy; 2024 Biblioteca Senati. Todos los derechos reservados.</p>
+      <p>Desarrollado por Valerio</p>
+    </footer>
+  </div>
+</div>

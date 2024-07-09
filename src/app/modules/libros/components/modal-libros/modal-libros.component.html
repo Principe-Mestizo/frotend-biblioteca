@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>{{operation}} Libro</h2>
+<mat-dialog-content>
+  <form [formGroup]="librosForm" (ngSubmit)="saveLibro()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="titulo" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Autor</mat-label>
+      <mat-select formControlName="autor_id" required>
+        <mat-option *ngFor="let autor of autores" [value]="autor.id">
+          {{autor.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Imagen URL</mat-label>
+      <input matInput formControlName="imagen">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Género</mat-label>
+      <mat-select formControlName="genero_id" required>
+        <mat-option *ngFor="let genero of generos" [value]="genero.id">
+          {{genero.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado" required>
+        <mat-option value="disponible">Disponible</mat-option>
+        <mat-option value="prestado">Prestado</mat-option>
+        <mat-option value="reservado">Reservado</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!librosForm.valid">Guardar</button>
+    </div>
+  </form>
+</mat-dialog-content>
